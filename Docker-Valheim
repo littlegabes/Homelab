@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    valheim-server:
+        container_name: valheim-server
+        ports:
+            - '2456-2457:2456-2457/udp'
+        volumes:
+            - REPLACE:/config'
+            - REPLACE:/opt/valheim'
+        environment:
+            - SERVER_NAME=FinalOGs
+            - WORLD_NAME=Figtopia
+            - SERVER_PASS=dingdong
+			- SERVER_PUBLIC=true
+			- UPDATE_IF_IDLE=true
+			- UPDATE_CRON=*/15 * * * *
+			- RESTART_IF_IDLE=true
+			- RESTART_CRON=1 0 * * *
+			- TZ=America/New_York
+			- BACKUPS=true
+			- BACKUPS_CRON=0 1 * * *
+			- BACKUPS_DIRECTORY=/backups
+			- BACKUPS_MAX_AGE=5
+			- BACKUPS_MAX_COUNT=5
+			- BACKUPS_IF_IDLE=true
+			- CAP-ADD=sys_nice
+        image: lloesche/valheim-server
